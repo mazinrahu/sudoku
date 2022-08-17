@@ -28,7 +28,7 @@ class Sudoku:
         """
         x = self.b
         count = 0
-        while count != 64:
+        while count != 45:
             row = randint(0,8)
             col = randint(0,8)
             if x[row][col] != 0:
