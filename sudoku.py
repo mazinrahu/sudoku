@@ -46,8 +46,8 @@ class Sudoku:
         Returns:
             List: Solved sudoku board
         """
-        f = self.empty_space(self.b)
-        x = copy.copy(self.b)
+        f = self.empty_space(board)
+        x = copy.copy(board)
         if f:
             row, col = f
         else:
