@@ -27,10 +27,13 @@ class Sudoku:
             List: Sudoku board with random values removed
         """
         x = self.b
-        for i in range(81 - 17):
+        count = 0
+        while count != 64:
             row = randint(0,8)
             col = randint(0,8)
-            x[row][col] = 0
+            if x[row][col] != 0:
+                x[row][col] = 0
+                count += 1
         return x
         
 
