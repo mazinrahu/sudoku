@@ -29,4 +29,5 @@ for i in range(9):
                         correct = True
                 else: print("Your answer was incorrect\n")
 print(rem)
+print("Congratulation! You finished the Sudoku board")
 

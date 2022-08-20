@@ -1,51 +1,5 @@
 import copy
-from random import shuffle, randint
-
-class Sudoku:
-    def __init__(self, diff, board = False,) -> None:
-        if not board:
-            self.b = [[0 for i in range(9)] for j in range(9)]
-        else:
-            self.b = board
-        self.d = diff
-
-    def generate(self):
-        """Generates a random sudoku board
-
-        Returns:
-            List: Sudoku board
-        """
-        nums =[1,2,3,4,5,6,7,8,9]
-        shuffle(nums)
-        x = self.b
-        x[0] = nums
-        return self.solve(x)
-
-    def remove(self):
-        """Removes random numbers from the Sudoku board based pn the difficulty 
-
-        Returns:
-            List: Sudoku board with random values removed
-        """
-        if self.d == "easy":
-            a = 81 - randint(50, 60)
-        elif self.d == "medium":
-            a = 81 - randint(40, 50)
-        elif self.d == "hard":
-            a = 81 - randint(20, 30)
-
-        x = self.b
-        count = 0
-        while count != a:
-            row = randint(0,8)
-            col = randint(0,8)
-            if x[row][col] != 0:
-                x[row][col] = 0
-                count += 1
-        return x
-        
-
-    def solve(self, board):
+def solve( board):
         """Solves a given Sudoku board
 
         Args:
@@ -54,7 +8,7 @@ class Sudoku:
         Returns:
             List: Solved sudoku board
         """
-        f = self.empty_space(board)
+        f = empty_space(board)
         x = copy.copy(board)
         if f:
             row, col = f
@@ -62,15 +16,16 @@ class Sudoku:
             return x
         
         for i in range(1,10):
-            if self.valid_pos(x, i, (row, col)):
+            if valid_pos(x, i, (row, col)):
                 x[row][col] = i
 
-                if self.solve(x):
+                if solve(x):
                     return x
 
                 x[row][col] = 0
         
-    def valid_pos(self, board , num, cell):
+
+def valid_pos(board , num, cell):
         """Checks if the given cell is valid for num
 
         Args:
@@ -98,8 +53,7 @@ class Sudoku:
         
         return True
 
-
-    def empty_space(self, board):
+def empty_space(board):
         """Finds the next empty space in the sudoku board
 
         Args:
@@ -113,13 +67,3 @@ class Sudoku:
                 if board[i][j] == 0:
                     return (i,j)
         return False
-
-    def __str__(self) -> str:
-        board = ""
-        for row in self.b:
-            board += f'{row}\n'
-        return board
-
-
-
-    
