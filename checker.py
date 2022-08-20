@@ -1,6 +1,7 @@
 from sudoku import Sudoku
 import copy
 
+
 a = Sudoku()
 solved = copy.deepcopy(a.generate())
 rem = a.remove()
