@@ -127,11 +127,13 @@ class Grid:
 
 
 class Cube:
+    row = 9
+    col = 9
     def __init__(self, value, row, col, width ,height):
         self.value = value
         self.temp = 0
-        self.row = 9
-        self.col = 9
+        self.row = row
+        self.col = col
         self.width = width
         self.height = height
         self.selected = False
@@ -191,7 +193,7 @@ def redraw_window(win, board):
 
 
 def main(diff):
-    """The main function run the game and all the key presses
+    """The main function runs the game and all the key presses
 
     Args:
         diff (str): The difficulty at which the Sudoku game runs
