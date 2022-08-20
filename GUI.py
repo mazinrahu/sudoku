@@ -1,5 +1,4 @@
 import pygame
-from game import solve, valid_pos
 import time
 pygame.font.init()
 from sudoku import Sudoku
@@ -21,12 +20,13 @@ class Grid:
         self.model = [[self.cubes[i][j].value for j in range(self.cols)] for i in range(self.rows)]
 
     def place(self, val):
+        a = Sudoku("easy")
         row, col = self.selected
         if self.cubes[row][col].value == 0:
             self.cubes[row][col].set(val)
             self.update_model()
 
-            if valid_pos(self.model, val, (row,col)) and solve(self.model):
+            if a.valid_pos(self.model, val, (row,col)) and a.solve(self.model):
                 return True
             else:
                 self.cubes[row][col].set(0)
@@ -126,7 +126,7 @@ class Cube:
         self.temp = val
 
 
-def redraw_window(win, board, time, strikes):
+def redraw_window(win, board):
     win.fill((255,255,255))
     # Draw grid and board
     board.draw(win)
@@ -143,7 +143,6 @@ def main(diff):
     strikes = 0
     while run:
 
-        play_time = round(time.time() - start)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -194,7 +193,7 @@ def main(diff):
         if board.selected and key != None:
             board.sketch(key)
 
-        redraw_window(win, board, play_time, strikes)
+        redraw_window(win, board)
         pygame.display.update()
 
 pygame.quit()
